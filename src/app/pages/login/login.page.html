@@ -1,0 +1,45 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>GoingDay</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">GoingDay</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Login</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <form (ngSubmit)="login()" [formGroup]="credentials">
+        <ion-item>
+          <ion-label position="stacked">Email: </ion-label>
+          <ion-input type="email" inputmode="email" placeholder="nome@exemplo.com" formControlName="email"></ion-input>
+          <ion-note slot="error" *ngIf="(email.dirty || email.touched) && email.errors">Please insert your email</ion-note>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Password: </ion-label>
+          <ion-input type="password" inputmode="text" formControlName="password"></ion-input>
+          <ion-note slot="error" *ngIf="(password.dirty || password.touched) && password.errors">Please insert valid password</ion-note>
+        </ion-item>
+
+        <ion-button type="submit" expand="block" strong="true" [disabled]="credentials.invalid">Login</ion-button>
+        <ion-button type="button" expand="block" (click)="forgotPassword()">Forgot Password?</ion-button>
+      </form>
+
+      <div class="ion-margin-top">
+        <ion-button type="button" expand="block" fill="outline" routerLink="/register">
+          <ion-icon name="person-outline" slot="start"></ion-icon>
+          Create Account
+        </ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
