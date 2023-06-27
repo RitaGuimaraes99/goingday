@@ -1,0 +1,7 @@
+{
+  "name": "goingday",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
