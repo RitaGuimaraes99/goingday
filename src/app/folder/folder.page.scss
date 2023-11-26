@@ -26,3 +26,18 @@ ion-menu-button {
 #container a {
   text-decoration: none;
 }
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 40px;
+}
+
+.logo-image {
+  width: 300px;
+  height: auto;
+}
+
+.btn {
+  background-color: var(--ion-color-goingday);
+}

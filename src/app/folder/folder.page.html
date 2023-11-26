@@ -17,7 +17,38 @@
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    Hello
+  <div class="logo-container">
+    <img src="assets/images/logo.png" alt="Logo" class="logo-image" />
+  </div>
+  <p></p>
+  <p></p>
+
+  <div class="card-container">
+    <div *ngFor="let viagem of viagens">
+      <ion-card class="card">
+        <ion-card-header>
+          <ion-card-title>{{viagem.title}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-item>
+            <ion-label>{{ viagem.start_date }}</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>{{ viagem.end_date }}</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label *ngFor="let local of viagem.locais">
+              {{ local.name }}
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>{{ viagem.notes }}</ion-label>
+          </ion-item>
+          <ion-item>
+           <ion-button class="btn"  (click)="shareViagens()">Share</ion-button>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+    </div>
   </div>
 </ion-content>

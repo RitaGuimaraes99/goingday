@@ -1,16 +1,102 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
+    <ion-title>
+      Plan New Trip
+    </ion-title>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Plan New Trip</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="toggleSearchbar()">{{ isSearchbarOpen ? 'Cancel' : 'Select City' }}</ion-button>
+      <ion-button (click)="saveAllData()">Save</ion-button> <!-- Keep this line -->
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Plan New Trip</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <ion-item>
+    <ion-label>Title:</ion-label>
+    <ion-input type="text" [(ngModel)]="title"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Start Date:</ion-label>
+    <ion-input
+      type="text"
+      readonly
+      [(ngModel)]="start_date"
+      (click)="openStartCalendar()"
+      placeholder="Select a date"
+    ></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>End Date:</ion-label>
+    <ion-input
+      type="text"
+      readonly
+      [(ngModel)]="end_date"
+      (click)="openEndCalendar()"
+      placeholder="Select a date"
+    ></ion-input>
+  </ion-item>
+
+  <ion-datetime
+    displayFormat="YYYY-MM-DD"
+    pickerFormat="YYYY-MM-DD"
+    min="2023-01-01"
+    max="2030-12-31"
+    [(ngModel)]="start_date"
+    [(ngModel)]="start_date"
+    [value]="start_date + 'T00:00:00.000Z'"
+    *ngIf="isStartCalendarOpen"
+    (ionBlur)="isStartCalendarOpen = false"
+  ></ion-datetime>
+
+  <ion-datetime
+    displayFormat="YYYY-MM-DD"
+    pickerFormat="YYYY-MM-DD"
+    min="2023-01-01"
+    max="2030-12-31"
+    [(ngModel)]="end_date"
+    [(ngModel)]="end_date"
+    [value]="end_date + 'T00:00:00.000Z'"
+    *ngIf="isEndCalendarOpen"
+    (ionBlur)="isEndCalendarOpen = false"
+  ></ion-datetime>
+
+
+
+  <ion-item>
+    <ion-label>Notes:</ion-label>
+    <ion-textarea [(ngModel)]="notes"></ion-textarea>
+  </ion-item>
+
+  <div class="select-city-button">
+    <ion-button (click)="toggleSearchbar()">{{ isSearchbarOpen ? 'Cancel' : 'Select City' }}</ion-button>
+  </div>
+
+  <ng-container *ngIf="isSearchbarOpen">
+    <ion-searchbar [(ngModel)]="search" (ionChange)="searchLocais()" *ngIf="isSearchbarOpen">
+      <ion-icon slot="clear" name="close" (click)="clearSearchbar()"></ion-icon>
+    </ion-searchbar>
+    <ion-list *ngIf="locaisProcurado.length > 0">
+      <ion-item *ngFor="let local of locaisProcurado">
+        <ion-label>{{ local.name }}</ion-label>
+        <ion-button slot="end" (click)="saveData(local)">Add</ion-button>
+      </ion-item>
+    </ion-list>
+    <div *ngIf="locaisProcurado.length === 0">
+      <p>No matching cities found.</p>
+    </div>
+  </ng-container>
+
+  <div *ngIf="!isSearchbarOpen && selectedLocais.length > 0">
+    <ion-item *ngFor="let local of selectedLocais">
+      <ion-label>{{ local.name }}</ion-label>
+    </ion-item>
+  </div>
+
+  <div *ngIf="!isSearchbarOpen && selectedLocais.length === 0">
+    <p>No city selected.</p>
+  </div>
 </ion-content>

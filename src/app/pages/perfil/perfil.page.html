@@ -13,4 +13,19 @@
       <ion-title size="large">Perfil</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ion-list>
+    <ion-item>
+      <ion-label position="stacked">Email: </ion-label>
+      <ion-input type="email" [(ngModel)]="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Password: </ion-label>
+      <ion-input type="password" [(ngModel)]="password"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="full" (click)="changeEmail()" class="custom-button">Change Email</ion-button>
+  <p></p>
+  <ion-button expand="full" (click)="changePassword()" class="custom-button">Change Password</ion-button>
 </ion-content>

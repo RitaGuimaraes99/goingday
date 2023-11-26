@@ -21,10 +21,17 @@ export class LoginPage implements OnInit{
     private authService: AuthService,
     private loadingController: LoadingController,
     private alertController: AlertController,
-    private router: Router) { }
+    private router: Router
+  ) { 
+    this.authService.getCurrentUser().subscribe((user) => {
+      if(user){
+        this.router.navigateByUrl('/folder/home',  { replaceUrl: true })
+      }
+    })
+  }
 
   ngOnInit() {
-    this.clearFormFields();
+    //this.clearFormFields();
   }
 
     get email(){
@@ -45,10 +52,11 @@ export class LoginPage implements OnInit{
     
       if (error) {
         this.showAlert("Login failed", error.message);
-      } else {
+      } 
+      /*else {
         // Successful login, navigate to another page or perform necessary actions
         this.router.navigate(['/folder/home']); // Replace '/dashboard' with the desired destination
-      }
+      }*/
     }
     
   async forgotPassword() {
@@ -93,12 +101,13 @@ export class LoginPage implements OnInit{
     await alert.present();
   }
 
-  private clearFormFields() {
+  /*private clearFormFields() {
     this.credentials.reset();
   }
 
   ionViewWillEnter() {
     this.clearFormFields();
   }
+  */
 
 }

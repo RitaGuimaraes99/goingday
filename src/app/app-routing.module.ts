@@ -12,13 +12,13 @@ const routes: Routes = [
   loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   },
   {
-  path: 'folder/:id',
-  loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
-  },
+    path: 'register',
+    loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
+    },
   {
-  path: 'register',
-  loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
-  },
+  path: 'folder/home',
+  loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
+  },  
   {
   path: 'viagem',
   loadChildren: () => import('./pages/viagem/viagem.module').then( m => m.ViagemPageModule)
